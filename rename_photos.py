@@ -94,11 +94,7 @@ def main() -> int:
 
     pattern = "**/*" if args.recursive else "*"
     photos = sorted(p for p in args.folder.glob(pattern) if p.is_file() and p.suffix.lower() in IMAGE_EXTS)
-    if not photos:
-        print("No images found.")
-        return 0
-
-    print(f"Found {len(photos)} image(s). Mode: {'APPLY' if args.apply else 'DRY-RUN'}\n")
+    
 
     planned = []
     taken = set()
