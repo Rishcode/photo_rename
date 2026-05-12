@@ -47,6 +47,13 @@ def caption_image(path: Path, timeout: int = 120) -> str:
     return r.json()["choices"][0]["message"]["content"].strip()
 
 
+def slugify(text: str) -> str:
+    text = text.lower().strip().strip('"\'.')
+    text = re.sub(r"[^\w\s-]", "", text)
+    text = re.sub(r"[\s_-]+", "-", text).strip("-")
+    if len(text) > MAX_NAME_LEN:
+        text = text[:MAX_NAME_LEN].rsplit("-", 1)[0]
+    return text or "untitled"
 
 
 def unique_path(target: Path, taken: set) -> Path:
